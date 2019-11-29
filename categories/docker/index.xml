@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>docker on shenchen</title>
-    <link>https://shenchen123456.github.io/categories/docker/</link>
+    <link>http://shenchen123456.github.io/categories/docker/</link>
     <description>Recent content in docker on shenchen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 15 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://shenchen123456.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://shenchen123456.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DockerFile基本</title>
-      <link>https://shenchen123456.github.io/post/docker2/</link>
+      <link>http://shenchen123456.github.io/post/docker2/</link>
       <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://shenchen123456.github.io/post/docker2/</guid>
+      <guid>http://shenchen123456.github.io/post/docker2/</guid>
       <description>1.DockerFile简介 DockerFile是用来构建Docker镜像的构建文件，是由系一列命令和参数构成的脚本。例如CentOS为例 2</description>
     </item>
     
     <item>
       <title>docker初体验</title>
-      <link>https://shenchen123456.github.io/post/docker/</link>
+      <link>http://shenchen123456.github.io/post/docker/</link>
       <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://shenchen123456.github.io/post/docker/</guid>
+      <guid>http://shenchen123456.github.io/post/docker/</guid>
       <description>1.docker架构图 Docker是一个Client-Server结构的系统，Docker守护进程运行在主机上， 然后通过Socket连接从客</description>
     </item>
     

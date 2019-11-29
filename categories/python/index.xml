@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on shenchen</title>
-    <link>https://shenchen123456.github.io/categories/python/</link>
+    <link>http://shenchen123456.github.io/categories/python/</link>
     <description>Recent content in Python on shenchen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 23 Oct 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://shenchen123456.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://shenchen123456.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python 字符串前面加u,r,b,f的含义</title>
-      <link>https://shenchen123456.github.io/post/python-perfix/</link>
+      <link>http://shenchen123456.github.io/post/python-perfix/</link>
       <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://shenchen123456.github.io/post/python-perfix/</guid>
+      <guid>http://shenchen123456.github.io/post/python-perfix/</guid>
       <description>Python 字符串前面加u,r,b,f的含义 1、字符串前加 u 例：u&amp;quot;我是含有中文字符组成的字符串。&amp;rdquo; 作用： 后面字符串以 Unicode 格式 进行</description>
     </item>
     

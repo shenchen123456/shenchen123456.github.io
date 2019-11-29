@@ -1,2 +1,3 @@
-# shenchen123456.github.io
-personal blog
+# hugo搭建的静态
+不定期更新
+
