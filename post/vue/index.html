@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-Git常用命令
+初识Vue
 </title>
 
     
@@ -21,21 +21,21 @@ Git常用命令
 
 <meta name="generator" content="Hugo 0.60.0" />
 
-<link rel="canonical" href="http://shenchen123456.github.io/post/git/" />
+<link rel="canonical" href="http://shenchen123456.github.io/post/vue/" />
 
 
-<meta property="og:title" content="Git常用命令" />
-<meta property="og:description" content="git init &mdash;&mdash;&mdash;&mdash;-创建Git 仓库 git config &ndash;global user.name tom &mdash;&mdash;&mdash;&mdash" />
+<meta property="og:title" content="初识Vue" />
+<meta property="og:description" content="HTML模板 插值表达式:声明式渲染 {{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁 v-text:通常使用夜方式 V-htm1:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://shenchen123456.github.io/post/git/" />
-<meta property="article:published_time" content="2019-08-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-08-16T00:00:00+00:00" />
+<meta property="og:url" content="http://shenchen123456.github.io/post/vue/" />
+<meta property="article:published_time" content="2019-11-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-11-29T00:00:00+00:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Git常用命令"/>
-<meta name="twitter:description" content="git init &mdash;&mdash;&mdash;&mdash;-创建Git 仓库 git config &ndash;global user.name tom &mdash;&mdash;&mdash;&mdash"/>
+<meta name="twitter:title" content="初识Vue"/>
+<meta name="twitter:description" content="HTML模板 插值表达式:声明式渲染 {{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁 v-text:通常使用夜方式 V-htm1:"/>
 
 
 <link rel="stylesheet" href="/css/github-markdown.css" />
@@ -84,39 +84,81 @@ Git常用命令
       </div>
       <header>
         <h2 class="ui header">
-          Git常用命令
-          <div class="sub header">@ shenchen · Friday, Aug 16, 2019 · 3 minute read · Update at Aug 16, 2019</div>
+          初识Vue
+          <div class="sub header">@ shenchen · Friday, Nov 29, 2019 · 3 minute read · Update at Nov 29, 2019</div>
         </h2>
       </header>
-      <article style="margin-top: 2rem;"><p>git init		&mdash;&mdash;&mdash;&mdash;-创建Git 仓库</p>
-<p>git config &ndash;global user.name tom		&mdash;&mdash;&mdash;&mdash;-设置全局的用户名</p>
-<p>git config &ndash;global user.email <a href="mailto:tom@qq.com">tom@qq.com</a>		&mdash;&mdash;&mdash;&mdash;-设置全局的email</p>
-<p>git add [file name]			&mdash;&mdash;&mdash;&mdash;-追踪该文件并添加到暂存区</p>
-<p>git commit -m'说明信息&rsquo;			&mdash;&mdash;&mdash;&mdash;-将暂存区的内容提交到本地库</p>
-<p>git status			&mdash;&mdash;&mdash;&mdash;-查看工作的、缓存区的状态</p>
-<p>git log		&mdash;&mdash;&mdash;&mdash;-查看版本记录</p>
-<p>git log &ndash;pretty=oneline		&mdash;&mdash;&mdash;&mdash;-相对简单的查看版本记录</p>
-<p>git reflog			&mdash;&mdash;&mdash;&mdash;-版本操作记录</p>
-<p>git reset &ndash;hard HEAD^		&mdash;&mdash;&mdash;&mdash;-回退版本上个版本（一个 ^ 代表后退一个版本）</p>
-<p>git reset &ndash;hard HEAD~1		&mdash;&mdash;&mdash;&mdash;-回退版本上个版本 （按照索引）</p>
-<p>git reset &ndash;hard 版本序号	&mdash;&mdash;&mdash;&mdash;-回退指定的版本</p>
-<p>git checkout &ndash; 文件名		&mdash;&mdash;&mdash;&mdash;-丢弃工作区的改动</p>
-<p>git reset HEAD 文件名		&mdash;&mdash;&mdash;&mdash;-取消暂存</p>
-<p>git diff HEAD &ndash; 文件名		&mdash;&mdash;&mdash;&mdash;-对比当前工作区与某个版本的不同</p>
-<p>git diff HEAD HEAD^ &ndash; 文件名	&mdash;&mdash;&mdash;&mdash;-对比两个版本的不同</p>
-<p>git rm 文件名			&mdash;&mdash;&mdash;&mdash;-删除一个文件（可以通过恢复上个版本找回  ）</p>
-<p>git branch			&mdash;&mdash;&mdash;&mdash;-查看当前分支</p>
-<p>git checkout -b 分支名		&mdash;&mdash;&mdash;&mdash;-创建并且切换到分支</p>
-<p>git branch -d 分支名		&mdash;&mdash;&mdash;&mdash;-删除指定分支</p>
-<p>git checkout 分支名		&mdash;&mdash;&mdash;&mdash;-切换到指定分支</p>
-<p>git merge 分支名		&mdash;&mdash;&mdash;&mdash;-快速合并分支</p>
-<p>git merge &ndash;no-ff -m'说明&rsquo; 分支名		&mdash;&mdash;&mdash;&mdash;-快速合并分支，禁用fast forward模式</p>
-<p>git stash			&mdash;&mdash;&mdash;&mdash;-暂时保存当前工作现场</p>
-<p>git stash list			&mdash;&mdash;&mdash;&mdash;-列出保存的工作现场</p>
-<p>git stash pop			&mdash;&mdash;&mdash;&mdash;-恢复保存的工作现场</p>
-<p>ssh-keygen -t rsa -C &ldquo;邮箱&rdquo;</p>
-<p>git push origin 分支名		&mdash;&mdash;&mdash;&mdash;-将分支推送到远程</p>
-<p>git pull orgin 分支名		&mdash;&mdash;&mdash;&mdash;-拉取远程分支的代码</p>
+      <article style="margin-top: 2rem;"><h3 id="html">HTML模板</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">插值表达式:声明式渲染
+
+  	{{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁
+  	v-text:通常使用夜方式
+  	V-htm1:解析htm1，Js css.安全隠患
+  	
+双向這染:双向郷定
+  	v-mode1=*数据樸型&#34;在表単元素中使用，オ有意乂
+  
+事件: v-on筒写@
+  	@c11ck:点告事件
+  	@contextMenus右由事件，事件修饰符: .prevent阻止默人事件
+  	@keyup鍵盡事件
+  		13或者encer鍵·回车事件@keyup.13
+  		组合事件
+  		
+v-for:遍历
+  	数组; v-for=&#34;(Item, index) in items&#34;
+  	対象: v-for=&#34;(va1. key, index) in usez&#34;🔑提高渲染速度
+  	
+v-if:判断
+	v-f=&#34;布尓表达式&#34;: true -渲染，false-不渲染
+  	v-show=&#34;布尓表送式&#34;:总是渲染，false=display: none
+  	v-else-if=布尓表达式&#34;
+ 	v-e1se: else定要緊跟在if之后
+ 
+v-bind:绑定属性，筒写(:)
+  :class=&#34;{mfactive:布尓表达式}&#34;
+  
+vue实例js
+ 	el:选择器，对应html模板
+ 	data:数据模型
+ 	methods:定义方法
+ 	commputed:定义计算属性，计算本质就是方法，但是方法必须有返回值，计算属性]可以像数据模型一样使用。如				果计算属性的依赖项没有改变，直接从缓存中命中
+ 	watch:监听，方法名是要监听的数据模型名称message (newVa1, oldVal) {}
+ 	钩子函数:created,在对象初始化之后执行，通常在created中初始化数据
+ 			mounted,在浏览渲染完页面后执行，通常在mounted中操作dom元素
+ 	components:局部子组件
+ 			全局组件: Vue.component (&#34;组件名&#34;，{
+				template: &#34;html模板&#34;,
+				data(){
+				return {
+					数据模型
+					},
+				methods,watch
+				})
+				局部组件: const 组件对象名= {同上}
+				组件的通信:
+					1.父向子通信: a.父自定义属性，属性名随便写，属性值是要传递的数据模型
+								b.子通过props接收，参数名是自定义属性的属性名[&#34;属性名&#34;] {属性名:
+								{type default required}}
+					2.子向交通信: a.父自定义事件，事件名随便写，属性值是要传递的方法
+								b.定义事件调用子自己的方法，子的方法中通过this.emit(&#34;自定义事件
+								名&#34;)
+								
+路由：vue-router npm insta1l vue-router --save
+	引入vue-router组件
+	实例化vue-router
+		const router = new VueRouter({
+			routes: [
+				{
+				path:路由路径，要以/&#34;开头component:路由组件
+				},
+				{}
+			]
+    引入到vue实例中:通过router
+	&lt;<span style="color:#f92672">router-link</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/login&#34;</span>&gt;&lt;/<span style="color:#f92672">router-link</span>&gt;
+	&lt;<span style="color:#f92672">router-view</span>&gt;&lt;/<span style="color:#f92672">router-view</span>&gt;	锚点
+</code></pre></div><p>​ <br>
+​</p>
 </article>
     </section>
 

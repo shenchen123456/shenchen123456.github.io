@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on shenchen</title>
+    <link>http://shenchen123456.github.io/about/</link>
+    <description>Recent content in Abouts on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="http://shenchen123456.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Desc</title>
+      <link>http://shenchen123456.github.io/about/desc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shenchen123456.github.io/about/desc/</guid>
+      <description>Hi, my name is shenchen123456.
+This is my blog.</description>
+    </item>
+    
+  </channel>
+</rss>

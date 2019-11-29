@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-Git常用命令
+
+
+
+
+  category | vue
+
+
 </title>
 
     
@@ -21,21 +27,20 @@ Git常用命令
 
 <meta name="generator" content="Hugo 0.60.0" />
 
-<link rel="canonical" href="http://shenchen123456.github.io/post/git/" />
+<link rel="canonical" href="http://shenchen123456.github.io/categories/vue/" />
 
 
-<meta property="og:title" content="Git常用命令" />
-<meta property="og:description" content="git init &mdash;&mdash;&mdash;&mdash;-创建Git 仓库 git config &ndash;global user.name tom &mdash;&mdash;&mdash;&mdash" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://shenchen123456.github.io/post/git/" />
-<meta property="article:published_time" content="2019-08-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-08-16T00:00:00+00:00" />
+<meta property="og:title" content="vue" />
+<meta property="og:description" content="shenchen的生活记录～" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://shenchen123456.github.io/categories/vue/" />
+<meta property="og:updated_time" content="2019-11-29T00:00:00+00:00" />
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Git常用命令"/>
-<meta name="twitter:description" content="git init &mdash;&mdash;&mdash;&mdash;-创建Git 仓库 git config &ndash;global user.name tom &mdash;&mdash;&mdash;&mdash"/>
+<meta name="twitter:title" content="vue"/>
+<meta name="twitter:description" content="shenchen的生活记录～"/>
 
 
 <link rel="stylesheet" href="/css/github-markdown.css" />
@@ -76,62 +81,7 @@ Git常用命令
 
           
 <div class="ui centered relaxed grid dream-grid">
-  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
-
-    <section class="ui top attached segment">
-      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
-        <i class="save link icon"></i>
-      </div>
-      <header>
-        <h2 class="ui header">
-          Git常用命令
-          <div class="sub header">@ shenchen · Friday, Aug 16, 2019 · 3 minute read · Update at Aug 16, 2019</div>
-        </h2>
-      </header>
-      <article style="margin-top: 2rem;"><p>git init		&mdash;&mdash;&mdash;&mdash;-创建Git 仓库</p>
-<p>git config &ndash;global user.name tom		&mdash;&mdash;&mdash;&mdash;-设置全局的用户名</p>
-<p>git config &ndash;global user.email <a href="mailto:tom@qq.com">tom@qq.com</a>		&mdash;&mdash;&mdash;&mdash;-设置全局的email</p>
-<p>git add [file name]			&mdash;&mdash;&mdash;&mdash;-追踪该文件并添加到暂存区</p>
-<p>git commit -m'说明信息&rsquo;			&mdash;&mdash;&mdash;&mdash;-将暂存区的内容提交到本地库</p>
-<p>git status			&mdash;&mdash;&mdash;&mdash;-查看工作的、缓存区的状态</p>
-<p>git log		&mdash;&mdash;&mdash;&mdash;-查看版本记录</p>
-<p>git log &ndash;pretty=oneline		&mdash;&mdash;&mdash;&mdash;-相对简单的查看版本记录</p>
-<p>git reflog			&mdash;&mdash;&mdash;&mdash;-版本操作记录</p>
-<p>git reset &ndash;hard HEAD^		&mdash;&mdash;&mdash;&mdash;-回退版本上个版本（一个 ^ 代表后退一个版本）</p>
-<p>git reset &ndash;hard HEAD~1		&mdash;&mdash;&mdash;&mdash;-回退版本上个版本 （按照索引）</p>
-<p>git reset &ndash;hard 版本序号	&mdash;&mdash;&mdash;&mdash;-回退指定的版本</p>
-<p>git checkout &ndash; 文件名		&mdash;&mdash;&mdash;&mdash;-丢弃工作区的改动</p>
-<p>git reset HEAD 文件名		&mdash;&mdash;&mdash;&mdash;-取消暂存</p>
-<p>git diff HEAD &ndash; 文件名		&mdash;&mdash;&mdash;&mdash;-对比当前工作区与某个版本的不同</p>
-<p>git diff HEAD HEAD^ &ndash; 文件名	&mdash;&mdash;&mdash;&mdash;-对比两个版本的不同</p>
-<p>git rm 文件名			&mdash;&mdash;&mdash;&mdash;-删除一个文件（可以通过恢复上个版本找回  ）</p>
-<p>git branch			&mdash;&mdash;&mdash;&mdash;-查看当前分支</p>
-<p>git checkout -b 分支名		&mdash;&mdash;&mdash;&mdash;-创建并且切换到分支</p>
-<p>git branch -d 分支名		&mdash;&mdash;&mdash;&mdash;-删除指定分支</p>
-<p>git checkout 分支名		&mdash;&mdash;&mdash;&mdash;-切换到指定分支</p>
-<p>git merge 分支名		&mdash;&mdash;&mdash;&mdash;-快速合并分支</p>
-<p>git merge &ndash;no-ff -m'说明&rsquo; 分支名		&mdash;&mdash;&mdash;&mdash;-快速合并分支，禁用fast forward模式</p>
-<p>git stash			&mdash;&mdash;&mdash;&mdash;-暂时保存当前工作现场</p>
-<p>git stash list			&mdash;&mdash;&mdash;&mdash;-列出保存的工作现场</p>
-<p>git stash pop			&mdash;&mdash;&mdash;&mdash;-恢复保存的工作现场</p>
-<p>ssh-keygen -t rsa -C &ldquo;邮箱&rdquo;</p>
-<p>git push origin 分支名		&mdash;&mdash;&mdash;&mdash;-将分支推送到远程</p>
-<p>git pull orgin 分支名		&mdash;&mdash;&mdash;&mdash;-拉取远程分支的代码</p>
-</article>
-    </section>
-
-    <footer class="ui attached segment dream-tags">
-      
-        <span>No Tags</span>
-      
-    </footer>
-
-    
-
-    
-
-  </div>
-  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
     <article class="dream-header">
   <section class="ui top attached center aligned segment">
     <div class="ui small circular image">
@@ -421,6 +371,39 @@ Git常用命令
 </article>
 
   </div>
+
+  
+    <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+      
+<article class="ui raised card dream-card">
+
+  <div class="image">
+    
+      <img src="/img/default4.jpg" alt="初识Vue" />
+    
+  </div>
+
+  <div class="content">
+    <a class="header" style="color: black !important;" href="http://shenchen123456.github.io/post/vue/">初识Vue</a>
+    <div class="meta">
+      <p class="date">Friday, Nov 29, 2019</p>
+      <p class="author">@ shenchen</p>
+    </div>
+    <div class="description">
+      HTML模板 插值表达式:声明式渲染 {{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁 v-text:通常使用夜方式 V-htm1:
+    </div>
+  </div>
+
+  <div class="extra content">
+    <a>
+      <i class="clock icon"></i>
+      3 minute read
+    </a>
+  </div>
+</article>
+
+    </div>
+  
 </div>
 
         </section>

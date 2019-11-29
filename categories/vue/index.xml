@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vue on shenchen</title>
+    <link>http://shenchen123456.github.io/categories/vue/</link>
+    <description>Recent content in vue on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shenchen123456.github.io/categories/vue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初识Vue</title>
+      <link>http://shenchen123456.github.io/post/vue/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://shenchen123456.github.io/post/vue/</guid>
+      <description>HTML模板 插值表达式:声明式渲染 {{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁 v-text:通常使用夜方式 V-htm1:</description>
+    </item>
+    
+  </channel>
+</rss>

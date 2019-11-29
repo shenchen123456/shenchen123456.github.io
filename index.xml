@@ -6,10 +6,19 @@
     <description>Recent content on shenchen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shenchen123456.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>初识Vue</title>
+      <link>http://shenchen123456.github.io/post/vue/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://shenchen123456.github.io/post/vue/</guid>
+      <description>HTML模板 插值表达式:声明式渲染 {{js表达式、数据模型}」js表达式必須有返回値，出现插值闪烁 v-text:通常使用夜方式 V-htm1:</description>
+    </item>
     
     <item>
       <title>初识ES6</title>
@@ -207,6 +216,16 @@
       
       <guid>http://shenchen123456.github.io/post/binarytree/</guid>
       <description>二叉树模型 基本结点 public class Node { Object data; Node leftChild; Node rightChild; public Node(Object data, Node leftChild, Node rightChild) { super(); this.data = data; this.leftChild = leftChild; this.rightChild = rightChild; } } 二叉树接口 //二叉树接口 public interface Tree { public int size(); public boolean isEmpty(); public int getHeight(); public void preTraversal(); public void middleTraversal();</description>
+    </item>
+    
+    <item>
+      <title>Desc</title>
+      <link>http://shenchen123456.github.io/about/desc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shenchen123456.github.io/about/desc/</guid>
+      <description>Hi, my name is shenchen123456.
+This is my blog.</description>
     </item>
     
   </channel>
