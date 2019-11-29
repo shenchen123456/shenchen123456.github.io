@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/spring/</link>
+    <description>Recent content in Spring on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 23 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BeanFactory and FactoryBean</title>
+      <link>https://shenchen123456.github.io/post/beanfactory-and-factorybean/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/beanfactory-and-factorybean/</guid>
+      <description>BeanFactory，这是Spring容器的基础实现类，它负责生产和管理Bean的一个工厂。当然BeanFactory只是一个接口，它的常</description>
+    </item>
+    
+    <item>
+      <title>Spring IOC</title>
+      <link>https://shenchen123456.github.io/post/spring/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/spring/</guid>
+      <description>1.ApplicationContext的三个常用实现类： classPathApplicationContext： 它可以加载类路径下的配置文</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ssm整合 on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/ssm%E6%95%B4%E5%90%88/</link>
+    <description>Recent content in ssm整合 on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 12 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/ssm%E6%95%B4%E5%90%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ssm整合</title>
+      <link>https://shenchen123456.github.io/post/ssm/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/ssm/</guid>
+      <description>1.applicaitonContext.xml &amp;lt;!--管理所有除Controller注解的业务逻辑组件--&amp;gt; &amp;lt;context:component-scan base-package=&amp;#34;*****&amp;#34;&amp;gt; &amp;lt;context:exclude-filter type=&amp;#34;annotation&amp;#34; expression=&amp;#34;org.springframework.stereotype.Controller&amp;#34;/&amp;gt; &amp;lt;/context:component-scan&amp;gt; &amp;lt;!--引入外部dbconfig.proper</description>
+    </item>
+    
+  </channel>
+</rss>

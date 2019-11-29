@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/linux/</link>
+    <description>Recent content in Linux on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux目录结构</title>
+      <link>https://shenchen123456.github.io/post/linux2/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/linux2/</guid>
+      <description>目录 /bin 存放二进制可执行文件(ls,cat,mkdir等)，常用命令一般都在这里。 /etc 存放系统管理和配置文件 /home 存放所有用户文件的根目录，是用户主</description>
+    </item>
+    
+    <item>
+      <title>vi和vim</title>
+      <link>https://shenchen123456.github.io/post/vi%E5%92%8Cvim/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/vi%E5%92%8Cvim/</guid>
+      <description>正常模式下： 1）拷贝当前行 yy 拷贝当前行向下的5行 5yy。并粘贴（p） 2）删除当前行 dd 删除当前行向下的5行 5dd 3）在文件中查找某个单词 /关键字 4</description>
+    </item>
+    
+    <item>
+      <title>虚拟机安装</title>
+      <link>https://shenchen123456.github.io/post/linux/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/linux/</guid>
+      <description>先进入BIOS开启虚拟 1.安装vm12虚拟机 1.1 1.2 1.3 1.5 cdkey：5A02H-AU243-TZJ49-GTC7K-3C61N 1.4 2.下载Cent</description>
+    </item>
+    
+  </channel>
+</rss>

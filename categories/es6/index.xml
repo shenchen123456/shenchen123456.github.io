@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ES6 on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/es6/</link>
+    <description>Recent content in ES6 on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/es6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初识ES6</title>
+      <link>https://shenchen123456.github.io/post/es6/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/es6/</guid>
+      <description>hello-es6 ES6 各种新语法 入门了解 石川blue讲解 视频地址 b站：深入解读ES6系列 看视频整理要点笔记: hello-es6 1.ES6怎么来的 2.ES6兼容性 3.变量 let 和 常</description>
+    </item>
+    
+  </channel>
+</rss>

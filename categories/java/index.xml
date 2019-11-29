@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/java/</link>
+    <description>Recent content in java on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Annotation</title>
+      <link>https://shenchen123456.github.io/post/annotation/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/annotation/</guid>
+      <description>注解本质上就是一个接口，该接口默认继承Annotation接口 1、元注解 ​ 元注解的作用就是描述其他注解。Java1.5定义了4个标准的met</description>
+    </item>
+    
+    <item>
+      <title>IO</title>
+      <link>https://shenchen123456.github.io/post/io/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/io/</guid>
+      <description>一、字节与字符 字节与字符之间的关系 Java采用unicode编码，通讲，2个字节来表示一个字符。 在0~127整数之间的字符映射，unicod</description>
+    </item>
+    
+    <item>
+      <title>常用的函数式接口</title>
+      <link>https://shenchen123456.github.io/post/function/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/function/</guid>
+      <description>常用的函数式接口 jdk提供了大量常用的函数式接口以丰富lambda的典型使用场景，它们主要在java.util.function包中被提高。</description>
+    </item>
+    
+    <item>
+      <title>遍历文件夹</title>
+      <link>https://shenchen123456.github.io/post/file/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/file/</guid>
+      <description>1.遍历文件 public static void main(String[] args) throws Exception { String filepath = &amp;#34;E:/IDEA/workspace/MyWorkspace/JavaTest&amp;#34;; File file = new File(filepath); getfile(file); } public static void getfile(File file) { System.out.println(file.getAbsolutePath()); File[] files = file.listFiles(); for (File file1 : files) { if (file1.isDirectory()) { getfile(file1); } else { System.out.println(file1); } } } main E:\IDEA\workspace\MyWorkspace\JavaTest E:\IDEA\workspace\MyWorkspace\JavaTest\JavaTest.iml E:\IDEA\workspace\MyWorkspace\JavaTest\src E:\IDEA\workspace\MyWorkspace\JavaTest\src\com E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\LinkedBinaryTree.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Node.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\QuickSort.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Test.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Tree.java 2.使用文件过</description>
+    </item>
+    
+    <item>
+      <title>jvm了解</title>
+      <link>https://shenchen123456.github.io/post/jvm/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/jvm/</guid>
+      <description>JVM基本构架 虚拟机是物理机的软件实现。Java的设计理念是WORA（Write Once Run Anywhere，一次编写随处运行）。编译器将Java文</description>
+    </item>
+    
+    <item>
+      <title>关于 降级,熔断,限流</title>
+      <link>https://shenchen123456.github.io/post/java/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/java/</guid>
+      <description>当我们的系统的访问量突然剧增，大量的请求涌入过来，最典型的就是秒杀业务了，我们可能会知道会有一波高峰，这时候该如何处理？而且现在很多情况我们</description>
+    </item>
+    
+    <item>
+      <title>关于重写equals同时重写hashcode</title>
+      <link>https://shenchen123456.github.io/post/equelsandhashcode/</link>
+      <pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/equelsandhashcode/</guid>
+      <description>1.Object中equals方法和hashcode public boolean equals(Object obj) { return (this == obj); } public native int hashCode(); 可以看出Object的equals是使用“==”实现的，即该</description>
+    </item>
+    
+  </channel>
+</rss>

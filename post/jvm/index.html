@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+jvm了解
+</title>
+
+    
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+  
+  <meta name="author" content="shenchen" />
+  <meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+<link rel="canonical" href="https://shenchen123456.github.io/post/jvm/" />
+
+
+<meta property="og:title" content="jvm了解" />
+<meta property="og:description" content="JVM基本构架 虚拟机是物理机的软件实现。Java的设计理念是WORA（Write Once Run Anywhere，一次编写随处运行）。编译器将Java文" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shenchen123456.github.io/post/jvm/" />
+<meta property="article:published_time" content="2019-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-06T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="jvm了解"/>
+<meta name="twitter:description" content="JVM基本构架 虚拟机是物理机的软件实现。Java的设计理念是WORA（Write Once Run Anywhere，一次编写随处运行）。编译器将Java文"/>
+
+
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment">
+      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
+        <i class="save link icon"></i>
+      </div>
+      <header>
+        <h2 class="ui header">
+          jvm了解
+          <div class="sub header">@ shenchen · Tuesday, Aug 6, 2019 · 6 minute read · Update at Aug 6, 2019</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><h2 id="jvm">JVM基本构架</h2>
+<p>虚拟机是物理机的软件实现。Java的设计理念是WORA（Write Once Run Anywhere，一次编写随处运行）。编译器将Java文件编译为Java .class文件，然后将.class文件输入到JVM中，JVM执行类文件的加载和执行的操作。以下为JVM架构图：</p>
+<p><img src="../../material/jvm/jvm.jpg" alt=""></p>
+<p>如上面架构图所示，JVM分为三个主要子系统：</p>
+<h3 id="1class-loader-subsystem">1.类加载器子系统（Class Loader Subsystem）</h3>
+<p>Java的动态类加载功能由类加载器子系统处理，处理过程包括加载和链接，并在类文件运行时，首次引用类时就开始实例化类文件，而不是在编译时进行。</p>
+<h4 id="11-">1.1 加载</h4>
+<p>Boot Strap类加载器，Extension类加载器和Application</p>
+<p>(1) Boot Strap类加载器：负责从引导类路径加载类，除了rt.jar，它具有最高优先级；</p>
+<p>(2) Extension 类加载器：负责加载ext文件夹（jre \ lib）中的类；</p>
+<p>(3) Application类加载器：负责加载应用程序级类路径，环境变量中指定的路径等信息。</p>
+<p>上面的类装载器在加载类文件时遵循委托层次算法（Delegation Hierarchy Algorithm）。</p>
+<h4 id="12-">1.2 链接</h4>
+<p>(1) 验证（Verify）：字节码验证器将验证生成的字节码是否正确，如果验证失败，将提示验证错误；</p>
+<p>(2) 准备（Prepare）：对于所有静态变量，内存将会以默认值进行分配；</p>
+<p>(3) 解释（Resolve）：有符号存储器引用都将替换为来自方法区（Method Area）的原始引用。</p>
+<h4 id="13-">1.3 初始化</h4>
+<p>这是类加载的最后阶段，所有的静态变量都将被赋予原始值，并且静态区块将被执行。</p>
+<h3 id="2runtime-data-area">2.运行时数据区（Runtime Data Area）</h3>
+<p>运行时数据区可分为5个主要组件：</p>
+<p>(1) 方法区（Method Area）：所有的类级数据将存储在这里，包括静态变量。每个JVM只有一个方法区，它是一个共享资源；</p>
+<p>(2) 堆区域（Heap Area）：所有对象及其对应的实例变量和数组将存储在这里。每个JVM也只有一个堆区域。由于方法和堆区域共享多个线程的内存，所存储的数据不是线程安全的；</p>
+<p>(3) 堆栈区（Stack Area）：对于每个线程，将创建单独的运行时堆栈。对于每个方法调用，将在堆栈存储器中产生一个条目，称为堆栈帧。所有局部变量将在堆栈内存中创建。堆栈区域是线程安全的，因为它不共享资源。堆栈框架分为三个子元素：</p>
+<p>局部变量数组（Local Variable Array）：与方法相关，涉及局部变量，并在此存储相应的值</p>
+<p>操作数堆栈（Operand stack）：如果需要执行任何中间操作，操作数堆栈将充当运行时工作空间来执行操作</p>
+<p>帧数据（Frame Data）：对应于方法的所有符号存储在此处。在任何异常的情况下，捕获的区块信息将被保持在帧数据中；</p>
+<p>(4) PC寄存器（PC Registers）：每个线程都有单独的PC寄存器，用于保存当前执行指令的地址。一旦执行指令，PC寄存器将被下一条指令更新，是一个非常小的内存空间，可以忽略不计；</p>
+<p>(5) 本地方法堆栈（Native Method stacks）：本地方法堆栈保存本地方法信息。对于每个线程，将创建一个单独的本地方法堆栈。</p>
+<h3 id="3execution-engine">3.执行引擎（Execution Engine）</h3>
+<p>分配给运行时数据区的字节码将由执行引擎执行，执行引擎读取字节码并逐个执行。</p>
+<p>(1) 解释器：解释器更快地解释字节码，但执行缓慢。解释器的缺点是当一个方法被调用多次时，每次都需要一个新的解释；</p>
+<p>(2) JIT编译器：JIT编译器消除了解释器的缺点。执行引擎将在转换字节码时使用解释器的帮助，但是当它发现重复的代码时，将使用JIT编译器，它编译整个字节码并将其更改为本地代码。这个本地代码将直接用于重复的方法调用，这提高了系统的性能。JIT的构成组件为：</p>
+<p>中间代码生成器（Intermediate Code Generator）：生成中间代码</p>
+<p>代码优化器（Code Optimizer）：负责优化上面生成的中间代码</p>
+<p>目标代码生成器（Target Code Generator）：负责生成机器代码或本地代码</p>
+<p>分析器（Profiler）：一个特殊组件，负责查找热点，即该方法是否被多次调用；</p>
+<p>(3) 垃圾收集器(Garbage Collector)：收集和删除未引用的对象。可以通过调用“System.gc（）”触发垃圾收集，但不能保证执行。JVM的垃圾回收对象是已创建的对象。</p>
+<p>Java本机接口（JNI）：JNI将与本机方法库进行交互，并提供执行引擎所需的本机库。</p>
+<p>本地方法库（Native Method Libraries）：它是执行引擎所需的本机库的集合。</p>
+<h2 id="heading">堆内存调优简介</h2>
+<h3 id="runtimegetruntime"><strong>运行时数据区</strong>可以通过Runtime.getRuntime()方法获得</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">long</span> maxMemory <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">maxMemory</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//虚拟机试图使用的最大内存
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> totalMemory <span style="color:#f92672">=</span> Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">totalMemory</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//虚拟机中的内存总量
+</span><span style="color:#75715e"></span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;MAX_MEMORY = &#34;</span> <span style="color:#f92672">+</span> maxMemory <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;字节----&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>maxMemory<span style="color:#f92672">/</span>1024<span style="color:#f92672">/</span>1024<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;MB&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TOTAL_MEMORY = &#34;</span> <span style="color:#f92672">+</span> totalMemory <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;字节----&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>totalMemory<span style="color:#f92672">/</span>1024<span style="color:#f92672">/</span>1024<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;MB&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><img src="../../material/jvm/jvm2.png" alt=""></p>
+<p><img src="../../material/jvm/jvm3.png" alt=""></p>
+<h3 id="jvm1">常用JVM参数</h3>
+<table>
+<thead>
+<tr>
+<th>-Xms</th>
+<th>设置初始分配大小，默认为物理内存的“1/64”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-Xmx</td>
+<td>最大分配内存，默认为物理内存的“1/4”</td>
+</tr>
+<tr>
+<td>-XX:+PrintGCDetails</td>
+<td>输出详细的GC处理日志</td>
+</tr>
+<tr>
+<td>-XX:+PrintGCTimeStamps</td>
+<td>打印CG发生的时间戳</td>
+</tr>
+<tr>
+<td>-Xloggc:log/gc.log</td>
+<td>指定GC log的位置，以文件输出，帮助开发人员分析问题</td>
+</tr>
+<tr>
+<td>-XX:+HeapDumpOnOutOfMemoryError</td>
+<td>OOM时导出堆到文件，根据这个文件，可以看到系统dump时发生了什么</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading1">三大垃圾收集算法</h3>
+<pre><code>1.标记/清除算法【最基础】
+2.复制算法
+3.标记/整理算法
+jvm采用`分代收集算法`对不同区域采用不同的回收算法。
+</code></pre><h4 id="heading2"><strong>新生代采用复制算法</strong></h4>
+<p>新生代中因为对象都是&quot;朝生夕死的&rdquo;，【深入理解JVM虚拟机上说98%的对象,不知道是不是这么多，总之就是存活率很低】，适用于复制算法【复制算法比较适合用于存活率低的内存区域】。它优化了标记/清除算法的效率和内存碎片问题，且JVM不以5:5分配内存【由于存活率低，不需要复制保留那么大的区域造成空间上的浪费，因此不需要按1:1【原有区域:保留空间】划分内存区域，而是将内存分为一块Eden空间和From Survivor、To Survivor【保留空间】，三者默认比例为8:1:1，优先使用Eden区，若Eden区满，则将对象复制到第二块内存区上。但是不能保证每次回收都只有不多于10%的对象存货，所以Survivor区不够的话，则会依赖老年代年存进行分配】。</p>
+<p>GC开始时，对象只会存于Eden和From Survivor区域，To Survivor【保留空间】为空。</p>
+<p>GC进行时，Eden区所有存活的对象都被复制到To Survivor区，而From Survivor区中，仍存活的对象会根据它们的年龄值决定去向，年龄值达到年龄阈值(默认15是因为对象头中年龄战4bit，新生代每熬过一次垃圾回收，年龄+1)，则移到老年代，没有达到则复制到To Survivor。</p>
+<h4 id="heading3"><strong>老年代采用标记/清除算法或标记/整理算法</strong></h4>
+<p>由于老年代存活率高，没有额外空间给他做担保，必须使用这两种算法。</p>
+<p>内存效率：复制算法 &gt; 标记清除 &gt; 标记整理算法（此处的效率只是简单的对比时间复杂度，实际情况不一定如此）</p>
+<p>内存整齐度：复制算法 = 标记整理算法 &gt; 标记清除算法</p>
+<p>内存利用率：标记整理算法 = 标记清除算法 &gt; 复制算法</p>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+        <span>No Tags</span>
+      
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img1/2.jpg">
+      
+    </div>
+
+    <h3 class="ui header">shenchen&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h3>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/docker" class="item">docker</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker2/" class="item">DockerFile基本</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker/" class="item">docker初体验</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/es6" class="item">es6</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/es6/" class="item">初识ES6</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/git" class="item">git</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/git/" class="item">Git常用命令</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/java" class="item">java</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/annotation/" class="item">Annotation</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/io/" class="item">IO</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/function/" class="item">常用的函数式接口</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/file/" class="item">遍历文件夹</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/jvm/" class="item">jvm了解</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/java/" class="item">关于 降级,熔断,限流</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/equelsandhashcode/" class="item">关于重写equals同时重写hashcode</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/linux" class="item">linux</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux2/" class="item">Linux目录结构</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/vi%E5%92%8Cvim/" class="item">vi和vim</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux/" class="item">虚拟机安装</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/python" class="item">python</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/python-perfix/" class="item">Python 字符串前面加u,r,b,f的含义</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/spring" class="item">spring</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/beanfactory-and-factorybean/" class="item">BeanFactory and FactoryBean</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/spring/" class="item">Spring IOC</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/springmvc" class="item">springmvc</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/springmvc/" class="item">springmvc运行流程图</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/ssm%E6%95%B4%E5%90%88" class="item">ssm整合</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/ssm/" class="item">ssm整合</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="item">数据结构</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/dijkstra/" class="item">数据结构--Dijkstra算法（逻辑实现）</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/quicksort/" class="item">数据结构--快速排序</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/binarytree/" class="item">数据结构---二叉树基本实现</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+    </div>
+  </section>
+  
+
+  <section class="ui bottom attached center aligned segment">
+      
+      <p>© 2019 shenchen</p>
+      
+      <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu">
+          
+
+          
+
+          
+
+          
+
+          
+        </nav>
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+  
+
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+
+
+
+  </body>
+</html>

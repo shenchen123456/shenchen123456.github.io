@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on shenchen</title>
+    <link>https://shenchen123456.github.io/categories/git/</link>
+    <description>Recent content in Git on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git常用命令</title>
+      <link>https://shenchen123456.github.io/post/git/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/git/</guid>
+      <description>git init &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-创建Git 仓库 git config &amp;ndash;global user.name tom &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash</description>
+    </item>
+    
+  </channel>
+</rss>

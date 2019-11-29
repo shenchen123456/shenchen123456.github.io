@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+数据结构--快速排序
+</title>
+
+    
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+  
+  <meta name="author" content="shenchen" />
+  <meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+<link rel="canonical" href="https://shenchen123456.github.io/post/quicksort/" />
+
+
+<meta property="og:title" content="数据结构--快速排序" />
+<meta property="og:description" content="1.基本思想 1.1 先从数列中取出一个数作为基准数 1.2 分区过程，将比这个数大的全放在右边，小的放在左边（分区） 1.3 再对左右分区重复第一，二步，直到各区" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shenchen123456.github.io/post/quicksort/" />
+<meta property="article:published_time" content="2019-08-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-04T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据结构--快速排序"/>
+<meta name="twitter:description" content="1.基本思想 1.1 先从数列中取出一个数作为基准数 1.2 分区过程，将比这个数大的全放在右边，小的放在左边（分区） 1.3 再对左右分区重复第一，二步，直到各区"/>
+
+
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment">
+      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
+        <i class="save link icon"></i>
+      </div>
+      <header>
+        <h2 class="ui header">
+          数据结构--快速排序
+          <div class="sub header">@ shenchen · Sunday, Aug 4, 2019 · 2 minute read · Update at Aug 4, 2019</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><h2 id="1">1.基本思想</h2>
+<h4 id="11-">1.1	先从数列中取出一个数作为基准数</h4>
+<h4 id="12-">1.2	分区过程，将比这个数大的全放在右边，小的放在左边（分区）</h4>
+<h4 id="13-">1.3	再对左右分区重复第一，二步，直到各区间只有一个数（递归）</h4>
+<h2 id="2">2.物理实现</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuickSort</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quckSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> high <span style="color:#f92672">=</span> array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+        quickSort<span style="color:#f92672">(</span>array<span style="color:#f92672">,</span> low<span style="color:#f92672">,</span> high<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quickSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//???递归何时结束
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">&lt;</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//分区操作，将一个数组分成两个分区,返回分区界限索引
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> partition<span style="color:#f92672">(</span>array<span style="color:#f92672">,</span> low<span style="color:#f92672">,</span> high<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">//对左分区进行快速排序
+</span><span style="color:#75715e"></span>            quickSort<span style="color:#f92672">(</span>array<span style="color:#f92672">,</span> low<span style="color:#f92672">,</span> index <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">//对右分区进行快速排序
+</span><span style="color:#75715e"></span>            quickSort<span style="color:#f92672">(</span>array<span style="color:#f92672">,</span> index <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> high<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">partition</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//指定左指针i和右指针j
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> low<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> high<span style="color:#f92672">;</span>
+        <span style="color:#75715e">//将第一个数作为，基准数（挖坑）
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>low<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#75715e">//使用循环实现分区操作
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//从右向左移动j，找到第一个小于基准数的值array[j]
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> x <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                j<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#75715e">//将右侧找到小于基准数的值加入到左边的坑中,左指针向中间移动一位i++
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+                i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#75715e">//从左向右移动i，找到第一个大于等基准数的值array[i]
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> x <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#75715e">//将左侧找到大于基准数的值加入到右边的坑中,右指针向中间移动一位j--
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                array<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+                j<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#75715e">//使用基准值填坑，这就是基准值的最终位置
+</span><span style="color:#75715e"></span>        array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> x<span style="color:#f92672">;</span>
+        <span style="color:#75715e">//返回基准值的索引
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> i<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="main">main</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//创造一个无序数组
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>72<span style="color:#f92672">,</span> 57<span style="color:#f92672">,</span> 9<span style="color:#f92672">,</span> 6<span style="color:#f92672">,</span> 12<span style="color:#f92672">,</span> 45<span style="color:#f92672">,</span> 85<span style="color:#f92672">,</span> 41<span style="color:#f92672">,</span> 55<span style="color:#f92672">,</span> 45<span style="color:#f92672">,</span> 99<span style="color:#f92672">,</span> 77<span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">//输出该无序数组
+</span><span style="color:#75715e"></span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>array<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">//快速排序
+</span><span style="color:#75715e"></span>    quckSort<span style="color:#f92672">(</span>array<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">//输出有序数组
+</span><span style="color:#75715e"></span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>array<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="heading">结果</h2>
+<pre><code>[72, 57, 9, 6, 12, 45, 85, 41, 55, 45, 99, 77]
+[6, 9, 12, 41, 45, 45, 55, 57, 72, 77, 85, 99]
+</code></pre></article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+        <span>No Tags</span>
+      
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img1/2.jpg">
+      
+    </div>
+
+    <h3 class="ui header">shenchen&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h3>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/docker" class="item">docker</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker2/" class="item">DockerFile基本</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker/" class="item">docker初体验</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/es6" class="item">es6</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/es6/" class="item">初识ES6</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/git" class="item">git</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/git/" class="item">Git常用命令</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/java" class="item">java</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/annotation/" class="item">Annotation</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/io/" class="item">IO</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/function/" class="item">常用的函数式接口</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/file/" class="item">遍历文件夹</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/jvm/" class="item">jvm了解</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/java/" class="item">关于 降级,熔断,限流</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/equelsandhashcode/" class="item">关于重写equals同时重写hashcode</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/linux" class="item">linux</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux2/" class="item">Linux目录结构</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/vi%E5%92%8Cvim/" class="item">vi和vim</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux/" class="item">虚拟机安装</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/python" class="item">python</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/python-perfix/" class="item">Python 字符串前面加u,r,b,f的含义</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/spring" class="item">spring</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/beanfactory-and-factorybean/" class="item">BeanFactory and FactoryBean</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/spring/" class="item">Spring IOC</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/springmvc" class="item">springmvc</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/springmvc/" class="item">springmvc运行流程图</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/ssm%E6%95%B4%E5%90%88" class="item">ssm整合</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/ssm/" class="item">ssm整合</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="item">数据结构</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/dijkstra/" class="item">数据结构--Dijkstra算法（逻辑实现）</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/quicksort/" class="item">数据结构--快速排序</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/binarytree/" class="item">数据结构---二叉树基本实现</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+    </div>
+  </section>
+  
+
+  <section class="ui bottom attached center aligned segment">
+      
+      <p>© 2019 shenchen</p>
+      
+      <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu">
+          
+
+          
+
+          
+
+          
+
+          
+        </nav>
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+  
+
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+
+
+
+  </body>
+</html>

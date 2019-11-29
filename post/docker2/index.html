@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+DockerFile基本
+</title>
+
+    
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+  
+  <meta name="author" content="shenchen" />
+  <meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+<link rel="canonical" href="https://shenchen123456.github.io/post/docker2/" />
+
+
+<meta property="og:title" content="DockerFile基本" />
+<meta property="og:description" content="1.DockerFile简介 DockerFile是用来构建Docker镜像的构建文件，是由系一列命令和参数构成的脚本。例如CentOS为例 2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shenchen123456.github.io/post/docker2/" />
+<meta property="article:published_time" content="2019-08-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-15T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DockerFile基本"/>
+<meta name="twitter:description" content="1.DockerFile简介 DockerFile是用来构建Docker镜像的构建文件，是由系一列命令和参数构成的脚本。例如CentOS为例 2"/>
+
+
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment">
+      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
+        <i class="save link icon"></i>
+      </div>
+      <header>
+        <h2 class="ui header">
+          DockerFile基本
+          <div class="sub header">@ shenchen · Thursday, Aug 15, 2019 · 2 minute read · Update at Aug 15, 2019</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><h3 id="1dockerfile">1.DockerFile简介</h3>
+<p>DockerFile是用来构建Docker镜像的构建文件，是由系一列命令和参数构成的脚本。例如CentOS为例</p>
+<p><img src="../../material/docker/docker3.png" alt=""></p>
+<p>2.Docker体系结构</p>
+<p><img src="../../material/docker/docker4.png" alt=""></p>
+<h3 id="3comcat9">3.自定义comcat9镜像</h3>
+<p>1.准备apache-tomcat9.0.8.tar.gz和jdk-8u171-linux-x64.tar.gz</p>
+<p>2.mkdir -p /mydockerfile/tomcat9，将准备文件放在指定目录下</p>
+<p>3.在指定目录下新建一个c.txt（用做数据共享）和Dockerfile文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#960050;background-color:#1e0010">#</span>父镜像为centos
+FROM         centos
+MAINTAINER    zzyy<span style="color:#f92672">&lt;</span>zzyybs<span style="color:#a6e22e">@126.com</span><span style="color:#f92672">&gt;</span>
+<span style="color:#960050;background-color:#1e0010">#</span>把宿主机当前上下文的c<span style="color:#f92672">.</span><span style="color:#a6e22e">txt拷贝到容器</span><span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>路径下
+COPY c<span style="color:#f92672">.</span><span style="color:#a6e22e">txt</span> <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>cincontainer<span style="color:#f92672">.</span><span style="color:#a6e22e">txt</span>
+<span style="color:#960050;background-color:#1e0010">#</span>把java与tomcat添加到容器中
+ADD jdk<span style="color:#f92672">-</span>8u171<span style="color:#f92672">-</span>linux<span style="color:#f92672">-</span>x64<span style="color:#f92672">.</span><span style="color:#a6e22e">tar</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gz</span> <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>
+ADD apache<span style="color:#f92672">-</span>tomcat<span style="color:#f92672">-</span>9<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">8</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tar</span><span style="color:#f92672">.</span><span style="color:#a6e22e">gz</span> <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>
+<span style="color:#960050;background-color:#1e0010">#</span>安装vim编辑器
+RUN yum <span style="color:#f92672">-</span>y install vim
+<span style="color:#960050;background-color:#1e0010">#</span>设置工作访问时候的WORKDIR路径<span style="color:#960050;background-color:#1e0010">，</span>登录落脚点
+ENV MYPATH <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local
+WORKDIR $MYPATH
+<span style="color:#960050;background-color:#1e0010">#</span>配置java与tomcat环境变量
+ENV JAVA_HOME <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>jdk1<span style="color:#f92672">.</span><span style="color:#a6e22e">8</span><span style="color:#f92672">.</span><span style="color:#a6e22e">0_171</span>
+ENV CLASSPATH $JAVA_HOME<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>dt<span style="color:#f92672">.</span><span style="color:#a6e22e">jar</span><span style="color:#f92672">:</span>$JAVA_HOME<span style="color:#f92672">/</span>lib<span style="color:#f92672">/</span>tools<span style="color:#f92672">.</span><span style="color:#a6e22e">jar</span>
+ENV CATALINA_HOME <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>apache<span style="color:#f92672">-</span>tomcat<span style="color:#f92672">-</span>9<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">8</span>
+ENV CATALINA_BASE <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>apache<span style="color:#f92672">-</span>tomcat<span style="color:#f92672">-</span>9<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">8</span>
+ENV PATH $PATH<span style="color:#f92672">:</span>$JAVA_HOME<span style="color:#f92672">/</span>bin<span style="color:#f92672">:</span>$CATALINA_HOME<span style="color:#f92672">/</span>lib<span style="color:#f92672">:</span>$CATALINA_HOME<span style="color:#f92672">/</span>bin
+<span style="color:#960050;background-color:#1e0010">#</span>容器运行时监听的端口
+EXPOSE  8080
+<span style="color:#960050;background-color:#1e0010">#</span>启动时运行tomcat
+<span style="color:#960050;background-color:#1e0010">#</span> ENTRYPOINT <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/usr/local/apache-tomcat-9.0.8/bin/startup.sh&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#960050;background-color:#1e0010">#</span> CMD <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/usr/local/apache-tomcat-9.0.8/bin/catalina.sh&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;run&#34;</span><span style="color:#f92672">]</span>
+CMD <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>apache<span style="color:#f92672">-</span>tomcat<span style="color:#f92672">-</span>9<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">8</span><span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>startup<span style="color:#f92672">.</span><span style="color:#a6e22e">sh</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> tail <span style="color:#f92672">-</span>F <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>apache<span style="color:#f92672">-</span>tomcat<span style="color:#f92672">-</span>9<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">8</span><span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>logs<span style="color:#f92672">/</span>catalina<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span>
+</code></pre></div><p>4.docker build -t mytomcat9 .</p>
+<p>5.docker run -d -p 9080:8080 &ndash;name myt9</p>
+<p>-v /mydockerfile/tomcat9/test:/usr/local/apache-tomcat-9.0.8/webapps/test</p>
+<p>-v /mydockerfile/tomcat9/tomcat9logs/:/usr/local/apache-tomcat-9.0.8/logs</p>
+<p>&ndash;privileged=true mytomcat9</p>
+<p>在**/mydockerfile/tomcat9/test**内就可以编写项目了</p>
+<p>**/mydockerfile/tomcat9/tomcat9logs/**映射tomcat的日志</p>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+        <span>No Tags</span>
+      
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img1/2.jpg">
+      
+    </div>
+
+    <h3 class="ui header">shenchen&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h3>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/docker" class="item">docker</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker2/" class="item">DockerFile基本</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker/" class="item">docker初体验</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/es6" class="item">es6</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/es6/" class="item">初识ES6</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/git" class="item">git</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/git/" class="item">Git常用命令</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/java" class="item">java</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/annotation/" class="item">Annotation</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/io/" class="item">IO</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/function/" class="item">常用的函数式接口</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/file/" class="item">遍历文件夹</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/jvm/" class="item">jvm了解</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/java/" class="item">关于 降级,熔断,限流</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/equelsandhashcode/" class="item">关于重写equals同时重写hashcode</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/linux" class="item">linux</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux2/" class="item">Linux目录结构</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/vi%E5%92%8Cvim/" class="item">vi和vim</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux/" class="item">虚拟机安装</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/python" class="item">python</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/python-perfix/" class="item">Python 字符串前面加u,r,b,f的含义</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/spring" class="item">spring</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/beanfactory-and-factorybean/" class="item">BeanFactory and FactoryBean</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/spring/" class="item">Spring IOC</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/springmvc" class="item">springmvc</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/springmvc/" class="item">springmvc运行流程图</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/ssm%E6%95%B4%E5%90%88" class="item">ssm整合</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/ssm/" class="item">ssm整合</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="item">数据结构</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/dijkstra/" class="item">数据结构--Dijkstra算法（逻辑实现）</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/quicksort/" class="item">数据结构--快速排序</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/binarytree/" class="item">数据结构---二叉树基本实现</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+    </div>
+  </section>
+  
+
+  <section class="ui bottom attached center aligned segment">
+      
+      <p>© 2019 shenchen</p>
+      
+      <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu">
+          
+
+          
+
+          
+
+          
+
+          
+        </nav>
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+  
+
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+
+
+
+  </body>
+</html>

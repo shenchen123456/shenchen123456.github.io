@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+关于 降级,熔断,限流
+</title>
+
+    
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+  
+  <meta name="author" content="shenchen" />
+  <meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+<link rel="canonical" href="https://shenchen123456.github.io/post/java/" />
+
+
+<meta property="og:title" content="关于 降级,熔断,限流" />
+<meta property="og:description" content="当我们的系统的访问量突然剧增，大量的请求涌入过来，最典型的就是秒杀业务了，我们可能会知道会有一波高峰，这时候该如何处理？而且现在很多情况我们" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shenchen123456.github.io/post/java/" />
+<meta property="article:published_time" content="2019-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-06T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于 降级,熔断,限流"/>
+<meta name="twitter:description" content="当我们的系统的访问量突然剧增，大量的请求涌入过来，最典型的就是秒杀业务了，我们可能会知道会有一波高峰，这时候该如何处理？而且现在很多情况我们"/>
+
+
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment">
+      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
+        <i class="save link icon"></i>
+      </div>
+      <header>
+        <h2 class="ui header">
+          关于 降级,熔断,限流
+          <div class="sub header">@ shenchen · Tuesday, Aug 6, 2019 · 2 minute read · Update at Aug 6, 2019</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><p>当我们的系统的访问量突然剧增，大量的请求涌入过来，最典型的就是秒杀业务了，我们可能会知道会有一波高峰，这时候该如何处理？而且现在很多情况我们还需要调用第三方接口例如支付等，因此我们还得考虑如果第三方那边出问题了，返回异常的慢，我们系统该如何处理。</p>
+<p>常见的处理方式有三种：降级、熔断、限流。</p>
+<h2 id="heading"><strong>降级</strong></h2>
+<p>降级也就是服务降级，当我们的服务器压力剧增为了保证核心功能的可用性，而选择性的降低一些功能的可用性，或者直接关闭该功能。这就是典型的丢车保帅了。 就比如贴吧类型的网站，当服务器吃不消的时候，可以选择把发帖功能关闭，注册功能关闭，改密码，改头像这些都关了，为了确保登录和浏览帖子这种核心的功能。</p>
+<p>一般而言都会建立一个独立的降级系统，可以灵活且批量的配置服务器的降级功能。当然也有用代码自动降级的，例如接口超时降级、失败重试多次降级等。具体失败几次，超时设置多久，由你们的业务等其他因素决定。开个小会，定个值，扔线上去看看情况。根据情况再调优。</p>
+<h2 id="heading1"><strong>熔断</strong></h2>
+<p>降级一般而言指的是我们自身的系统出现了故障而降级。而熔断一般是指依赖的外部接口出现故障的情况断绝和外部接口的关系。</p>
+<p>例如你的A服务里面的一个功能依赖B服务，这时候B服务出问题了，返回的很慢。这种情况可能会因为这么一个功能而拖慢了A服务里面的所有功能，因此我们这时候就需要熔断！即当发现A要调用这B时就直接返回错误(或者返回其他默认值啊啥的)，就不去请求B了。我这还是举了两个服务的调用，有些那真的是一环扣一环，出问题不熔断，那真的是会雪崩。</p>
+<p>当然也有人认为熔断不就是降级的一种的，我觉得你非要说熔断也属于一种降级我也没法反驳，但是它们本质上的突出点和想表达的意思还是有一些不同的。</p>
+<p>那什么时候熔断合适呢？也就是到达哪个阈值进行熔断，5分钟内50%的请求都超过1秒？还是啥？参考降级。</p>
+<h2 id="heading2"><strong>限流</strong></h2>
+<p>上面说的两个算是请求过来我们都受理了，这个限流就更狠了，直接跟请求说对不起再见！也就是系统规定了多少承受能力，只允许这么些请求能过来，其他的请求就说再见了。</p>
+<p>一般限制的指标有：请求总量或某段时间内请求总量。</p>
+<p>请求总量：比如秒杀的，秒杀100份产品，我就放5000名进来，超过的直接拒绝请求了。</p>
+<p>某段时间内请求总量：比如规定了每秒请求的峰值是1W，这一秒内多的请求直接拒绝了。咱们下一秒再见。</p>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+        <span>No Tags</span>
+      
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img1/2.jpg">
+      
+    </div>
+
+    <h3 class="ui header">shenchen&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h3>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/docker" class="item">docker</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker2/" class="item">DockerFile基本</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker/" class="item">docker初体验</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/es6" class="item">es6</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/es6/" class="item">初识ES6</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/git" class="item">git</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/git/" class="item">Git常用命令</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/java" class="item">java</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/annotation/" class="item">Annotation</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/io/" class="item">IO</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/function/" class="item">常用的函数式接口</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/file/" class="item">遍历文件夹</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/jvm/" class="item">jvm了解</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/java/" class="item">关于 降级,熔断,限流</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/equelsandhashcode/" class="item">关于重写equals同时重写hashcode</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/linux" class="item">linux</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux2/" class="item">Linux目录结构</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/vi%E5%92%8Cvim/" class="item">vi和vim</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux/" class="item">虚拟机安装</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/python" class="item">python</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/python-perfix/" class="item">Python 字符串前面加u,r,b,f的含义</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/spring" class="item">spring</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/beanfactory-and-factorybean/" class="item">BeanFactory and FactoryBean</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/spring/" class="item">Spring IOC</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/springmvc" class="item">springmvc</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/springmvc/" class="item">springmvc运行流程图</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/ssm%E6%95%B4%E5%90%88" class="item">ssm整合</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/ssm/" class="item">ssm整合</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="item">数据结构</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/dijkstra/" class="item">数据结构--Dijkstra算法（逻辑实现）</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/quicksort/" class="item">数据结构--快速排序</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/binarytree/" class="item">数据结构---二叉树基本实现</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+    </div>
+  </section>
+  
+
+  <section class="ui bottom attached center aligned segment">
+      
+      <p>© 2019 shenchen</p>
+      
+      <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu">
+          
+
+          
+
+          
+
+          
+
+          
+        </nav>
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+  
+
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+
+
+
+  </body>
+</html>

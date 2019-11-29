@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+ssm整合
+</title>
+
+    
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+  
+  <meta name="author" content="shenchen" />
+  <meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+<link rel="canonical" href="https://shenchen123456.github.io/post/ssm/" />
+
+
+<meta property="og:title" content="ssm整合" />
+<meta property="og:description" content="1.applicaitonContext.xml &lt;!--管理所有除Controller注解的业务逻辑组件--&gt; &lt;context:component-scan base-package=&#34;*****&#34;&gt; &lt;context:exclude-filter type=&#34;annotation&#34; expression=&#34;org.springframework.stereotype.Controller&#34;/&gt; &lt;/context:component-scan&gt; &lt;!--引入外部dbconfig.proper" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shenchen123456.github.io/post/ssm/" />
+<meta property="article:published_time" content="2019-08-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-12T00:00:00+00:00" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ssm整合"/>
+<meta name="twitter:description" content="1.applicaitonContext.xml &lt;!--管理所有除Controller注解的业务逻辑组件--&gt; &lt;context:component-scan base-package=&#34;*****&#34;&gt; &lt;context:exclude-filter type=&#34;annotation&#34; expression=&#34;org.springframework.stereotype.Controller&#34;/&gt; &lt;/context:component-scan&gt; &lt;!--引入外部dbconfig.proper"/>
+
+
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment">
+      <div class="ui right ribbon black inverted label" onclick="savePostAsImg()">
+        <i class="save link icon"></i>
+      </div>
+      <header>
+        <h2 class="ui header">
+          ssm整合
+          <div class="sub header">@ shenchen · Monday, Aug 12, 2019 · 2 minute read · Update at Aug 12, 2019</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><h3 id="1applicaitoncontextxml">1.applicaitonContext.xml</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">管理所有除Controller注解的业务逻辑组件</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;context:component-scan</span> <span style="color:#a6e22e">base-package=</span><span style="color:#e6db74">&#34;*****&#34;</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;context:exclude-filter</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;annotation&#34;</span> <span style="color:#a6e22e">expression=</span><span style="color:#e6db74">&#34;org.springframework.stereotype.Controller&#34;</span><span style="color:#f92672">/&gt;</span>
+		<span style="color:#f92672">&lt;/context:component-scan&gt;</span>
+				
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">引入外部dbconfig.properties文件</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;context:property-placeholder</span> <span style="color:#a6e22e">location=</span><span style="color:#e6db74">&#34;classpath:******&#34;</span><span style="color:#f92672">/&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">创建数据源对象（使用的是c3p0连接池）</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;dataSource&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.mchange.v2.c3p0.ComboPooledDataSource&#34;</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;jdbcUrl&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${jdbc.url}&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>	
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;driverClass&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${jdbc.driver}&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;user&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${jdbc.username}&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${jdbc.password}&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> c3p0配置：当连接池中的连接耗尽的时候c3p0一次同时获取的连接数  </span><span style="color:#75715e">--&gt;</span>
+            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;acquireIncrement&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 初始连接池大小 </span><span style="color:#75715e">--&gt;</span>
+            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;initialPoolSize&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;10&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 连接池中连接最小个数 </span><span style="color:#75715e">--&gt;</span>
+            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;minPoolSize&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 连接池中连接最大个数 </span><span style="color:#75715e">--&gt;</span>
+            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;maxPoolSize&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;20&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+		<span style="color:#f92672">&lt;/bean&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">开启Spring事务管理器，引入数据源</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;dataSourceTransactionManager&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.jdbc.datasource.DataSourceTransactionManager&#34;</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dataSource&#34;</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;dataSource&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+		<span style="color:#f92672">&lt;/bean&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">开启基于注解的事务</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;tx:annotation-driven</span> <span style="color:#a6e22e">transaction-manager=</span><span style="color:#e6db74">&#34;dataSourceTransactionManager&#34;</span><span style="color:#f92672">/&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">整合MyBatis</span><span style="color:#75715e">--&gt;</span>
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">1.创建sqlSessionFactoryBean对象</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;sqlSessionFactoryBean&#34;</span>
+              <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.mybatis.spring.SqlSessionFactoryBean&#34;</span><span style="color:#f92672">&gt;</span>
+	 		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dataSource&#34;</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;dataSource&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 别名 </span><span style="color:#75715e">--&gt;</span>
+        	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;typeAliasesPackage&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;pojo完整包名&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+	 		<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 指定mapper文件的位置 </span><span style="color:#75715e">--&gt;</span>
+	 		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;mapperLocations&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;classpath:********&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+            <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> configLocation 指定配置全局文件的位置 （mybatis</span><span style="color:#75715e">-</span><span style="color:#75715e">config.xml）
+</span><span style="color:#75715e">	 		&lt;property name=&#34;configLocation&#34; value=&#34;classpath:*********&#34;&gt;&lt;/property&gt;
+</span><span style="color:#75715e">			  </span><span style="color:#75715e">--&gt;</span>
+	 	<span style="color:#f92672">&lt;/bean&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">2.加载mapper接口</span><span style="color:#75715e">--&gt;</span>
+		 <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.mybatis.spring.mapper.MapperScannerConfigurer&#34;</span><span style="color:#f92672">&gt;</span>
+              <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 </span><span style="color:#75715e">--&gt;</span>
+        		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;sqlSessionFactoryBeanName&#34;</span> 
+                          <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;sqlSessionFactory&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+	 		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;basePackage&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;com.student.dao&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+		 <span style="color:#f92672">&lt;/bean&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 事务管理器 </span><span style="color:#75715e">--&gt;</span>
+   		 <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;txManage&#34;</span>
+               <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.jdbc.datasource.DataSourceTransactionManager&#34;</span><span style="color:#f92672">&gt;</span>
+    	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dataSource&#34;</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;dataSource&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+   		 <span style="color:#f92672">&lt;/bean&gt;</span>
+		
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 声明式事务 </span><span style="color:#75715e">--&gt;</span>
+        <span style="color:#f92672">&lt;tx:advice</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;txAdvice&#34;</span> <span style="color:#a6e22e">transaction-manager=</span><span style="color:#e6db74">&#34;txManage&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;tx:attributes</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;tx:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ins*&#34;</span> <span style="color:#a6e22e">rollback-for=</span><span style="color:#e6db74">&#34;java.lang.Exception&#34;</span><span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;tx:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;del*&#34;</span>  <span style="color:#a6e22e">rollback-for=</span><span style="color:#e6db74">&#34;java.lang.Exception&#34;</span><span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;tx:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;upd*&#34;</span>  <span style="color:#a6e22e">rollback-for=</span><span style="color:#e6db74">&#34;java.lang.Exception&#34;</span><span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;tx:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#a6e22e">read-only=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;/tx:attributes&gt;</span>
+        <span style="color:#f92672">&lt;/tx:advice&gt;</span>
+        	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> 配置aop </span><span style="color:#75715e">--&gt;</span>
+        <span style="color:#f92672">&lt;aop:config</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;aop:pointcut</span> <span style="color:#a6e22e">expression=</span><span style="color:#e6db74">&#34;表达式**********&#34;</span> 
+                          <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;txpoint&#34;</span><span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;aop:advisor</span> <span style="color:#a6e22e">advice-ref=</span><span style="color:#e6db74">&#34;txAdvice&#34;</span> <span style="color:#a6e22e">pointcut-ref=</span><span style="color:#e6db74">&#34;txpoint&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/aop:config&gt;</span>
+
+</code></pre></div><h3 id="2springmvcxml">2.springmvc.xml</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">	<span style="color:#f92672">&lt;context:component-scan</span> <span style="color:#a6e22e">base-package=</span><span style="color:#e6db74">&#34;com.atguigu&#34;</span><span style="color:#f92672">&gt;</span>
+		<span style="color:#f92672">&lt;context:include-filter</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;annotation&#34;</span>
+                                <span style="color:#a6e22e">expression=</span><span style="color:#e6db74">&#34;org.springframework.stereotype.Controller&#34;</span><span style="color:#f92672">/&gt;</span>
+	<span style="color:#f92672">&lt;/context:component-scan&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">配置视图解析器</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.web.servlet.view.InternalResourceViewResolver&#34;</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;prefix&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/WEB-INF/pages/&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;suffix&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;.jsp&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/property&gt;</span>
+		<span style="color:#f92672">&lt;/bean&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">注解驱动</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;mvc:annotation-driven</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;/mvc:annotation-driven&gt;</span>
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">静态资源放行</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;mvc:default-servlet-handler</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><h3 id="3webxml">3.web.xml</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">Spring配置：读取applicationContext.xml</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;context-param</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;param-name</span><span style="color:#f92672">&gt;</span>contextConfigLocation<span style="color:#f92672">&lt;/param-name&gt;</span>
+			<span style="color:#f92672">&lt;param-value</span><span style="color:#f92672">&gt;</span>classpath:*****<span style="color:#f92672">&lt;/param-value&gt;</span>
+		<span style="color:#f92672">&lt;/context-param&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">启动Spring</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;listener</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;listener-class</span><span style="color:#f92672">&gt;</span>
+                org.springframework.web.context.ContextLoaderListener
+            <span style="color:#f92672">&lt;/listener-class&gt;</span>
+		<span style="color:#f92672">&lt;/listener&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">SringMVC配置 默认的配置文件路径为 /WEB</span><span style="color:#75715e">-</span><span style="color:#75715e">INF/&lt;Servlet</span><span style="color:#75715e">-</span><span style="color:#75715e">name&gt;</span><span style="color:#75715e">-</span><span style="color:#75715e">servlet.xml</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;servlet</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;servlet-name</span><span style="color:#f92672">&gt;</span>
+                springmvc
+            <span style="color:#f92672">&lt;/servlet-name&gt;</span>
+			<span style="color:#f92672">&lt;servlet-class</span><span style="color:#f92672">&gt;</span>
+                org.springframework.web.servlet.DispatcherServlet
+            <span style="color:#f92672">&lt;/servlet-class&gt;</span>
+			<span style="color:#f92672">&lt;load-on-startup</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">&lt;/load-on-startup&gt;</span>
+		<span style="color:#f92672">&lt;/servlet&gt;</span>
+		<span style="color:#f92672">&lt;servlet-mapping</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;servlet-name</span><span style="color:#f92672">&gt;</span>springmvc<span style="color:#f92672">&lt;/servlet-name&gt;</span>
+			<span style="color:#f92672">&lt;url-pattern</span><span style="color:#f92672">&gt;</span>/<span style="color:#f92672">&lt;/url-pattern&gt;</span>
+		<span style="color:#f92672">&lt;/servlet-mapping&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">配置SpringMVC编码过滤器（防止乱码）</span><span style="color:#75715e">--&gt;</span>
+		<span style="color:#f92672">&lt;filter</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;filter-name</span><span style="color:#f92672">&gt;</span>
+                CharacterEncodingFilter
+            <span style="color:#f92672">&lt;/filter-name&gt;</span>
+			<span style="color:#f92672">&lt;filter-class</span><span style="color:#f92672">&gt;</span>
+                org.springframework.web.filter.CharacterEncodingFilter
+            <span style="color:#f92672">&lt;/filter-class&gt;</span>
+			<span style="color:#f92672">&lt;init-param</span><span style="color:#f92672">&gt;</span>
+				<span style="color:#f92672">&lt;param-name</span><span style="color:#f92672">&gt;</span>encoding<span style="color:#f92672">&lt;/param-name&gt;</span>
+				<span style="color:#f92672">&lt;param-value</span><span style="color:#f92672">&gt;</span>UTF-8<span style="color:#f92672">&lt;/param-value&gt;</span>
+			<span style="color:#f92672">&lt;/init-param&gt;</span>
+		<span style="color:#f92672">&lt;/filter&gt;</span>
+		<span style="color:#f92672">&lt;filter-mapping</span><span style="color:#f92672">&gt;</span>
+			<span style="color:#f92672">&lt;filter-name</span><span style="color:#f92672">&gt;</span>CharacterEncodingFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
+			<span style="color:#f92672">&lt;url-pattern</span><span style="color:#f92672">&gt;</span>/*<span style="color:#f92672">&lt;/url-pattern&gt;</span>
+		<span style="color:#f92672">&lt;/filter-mapping&gt;</span>
+</code></pre></div></article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+        <span>No Tags</span>
+      
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/img1/2.jpg">
+      
+    </div>
+
+    <h3 class="ui header">shenchen&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h3>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/docker" class="item">docker</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker2/" class="item">DockerFile基本</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/docker/" class="item">docker初体验</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/es6" class="item">es6</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/es6/" class="item">初识ES6</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/git" class="item">git</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/git/" class="item">Git常用命令</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/java" class="item">java</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/annotation/" class="item">Annotation</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/io/" class="item">IO</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/function/" class="item">常用的函数式接口</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/file/" class="item">遍历文件夹</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/jvm/" class="item">jvm了解</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/java/" class="item">关于 降级,熔断,限流</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/equelsandhashcode/" class="item">关于重写equals同时重写hashcode</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/linux" class="item">linux</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux2/" class="item">Linux目录结构</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/vi%E5%92%8Cvim/" class="item">vi和vim</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/linux/" class="item">虚拟机安装</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/python" class="item">python</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/python-perfix/" class="item">Python 字符串前面加u,r,b,f的含义</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/spring" class="item">spring</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/beanfactory-and-factorybean/" class="item">BeanFactory and FactoryBean</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/spring/" class="item">Spring IOC</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/springmvc" class="item">springmvc</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/springmvc/" class="item">springmvc运行流程图</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/ssm%E6%95%B4%E5%90%88" class="item">ssm整合</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/ssm/" class="item">ssm整合</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="item">数据结构</a>
+        </div>
+        <div class="content">
+          <div class="ui list">
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/dijkstra/" class="item">数据结构--Dijkstra算法（逻辑实现）</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/quicksort/" class="item">数据结构--快速排序</a>
+              </div>
+            </div>
+          
+            <div class="item">
+              <div class="content">
+                <a href="https://shenchen123456.github.io/post/binarytree/" class="item">数据结构---二叉树基本实现</a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      
+    </div>
+  </section>
+  
+
+  <section class="ui bottom attached center aligned segment">
+      
+      <p>© 2019 shenchen</p>
+      
+      <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = '/'"></i>
+  </div>
+  <div class="item">
+    <i id="theme-switch" class="large link icon" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu">
+          
+
+          
+
+          
+
+          
+
+          
+        </nav>
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+  
+
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.pkgd.min.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/html2canvas.min.js"></script>
+
+
+
+  </body>
+</html>

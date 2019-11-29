@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on shenchen</title>
+    <link>https://shenchen123456.github.io/post/</link>
+    <description>Recent content in Posts on shenchen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shenchen123456.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初识ES6</title>
+      <link>https://shenchen123456.github.io/post/es6/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/es6/</guid>
+      <description>hello-es6 ES6 各种新语法 入门了解 石川blue讲解 视频地址 b站：深入解读ES6系列 看视频整理要点笔记: hello-es6 1.ES6怎么来的 2.ES6兼容性 3.变量 let 和 常</description>
+    </item>
+    
+    <item>
+      <title>BeanFactory and FactoryBean</title>
+      <link>https://shenchen123456.github.io/post/beanfactory-and-factorybean/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/beanfactory-and-factorybean/</guid>
+      <description>BeanFactory，这是Spring容器的基础实现类，它负责生产和管理Bean的一个工厂。当然BeanFactory只是一个接口，它的常</description>
+    </item>
+    
+    <item>
+      <title>Python 字符串前面加u,r,b,f的含义</title>
+      <link>https://shenchen123456.github.io/post/python-perfix/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/python-perfix/</guid>
+      <description>Python 字符串前面加u,r,b,f的含义 1、字符串前加 u 例：u&amp;quot;我是含有中文字符组成的字符串。&amp;rdquo; 作用： 后面字符串以 Unicode 格式 进行</description>
+    </item>
+    
+    <item>
+      <title>Git常用命令</title>
+      <link>https://shenchen123456.github.io/post/git/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/git/</guid>
+      <description>git init &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-创建Git 仓库 git config &amp;ndash;global user.name tom &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash</description>
+    </item>
+    
+    <item>
+      <title>DockerFile基本</title>
+      <link>https://shenchen123456.github.io/post/docker2/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/docker2/</guid>
+      <description>1.DockerFile简介 DockerFile是用来构建Docker镜像的构建文件，是由系一列命令和参数构成的脚本。例如CentOS为例 2</description>
+    </item>
+    
+    <item>
+      <title>docker初体验</title>
+      <link>https://shenchen123456.github.io/post/docker/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/docker/</guid>
+      <description>1.docker架构图 Docker是一个Client-Server结构的系统，Docker守护进程运行在主机上， 然后通过Socket连接从客</description>
+    </item>
+    
+    <item>
+      <title>Linux目录结构</title>
+      <link>https://shenchen123456.github.io/post/linux2/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/linux2/</guid>
+      <description>目录 /bin 存放二进制可执行文件(ls,cat,mkdir等)，常用命令一般都在这里。 /etc 存放系统管理和配置文件 /home 存放所有用户文件的根目录，是用户主</description>
+    </item>
+    
+    <item>
+      <title>vi和vim</title>
+      <link>https://shenchen123456.github.io/post/vi%E5%92%8Cvim/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/vi%E5%92%8Cvim/</guid>
+      <description>正常模式下： 1）拷贝当前行 yy 拷贝当前行向下的5行 5yy。并粘贴（p） 2）删除当前行 dd 删除当前行向下的5行 5dd 3）在文件中查找某个单词 /关键字 4</description>
+    </item>
+    
+    <item>
+      <title>虚拟机安装</title>
+      <link>https://shenchen123456.github.io/post/linux/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/linux/</guid>
+      <description>先进入BIOS开启虚拟 1.安装vm12虚拟机 1.1 1.2 1.3 1.5 cdkey：5A02H-AU243-TZJ49-GTC7K-3C61N 1.4 2.下载Cent</description>
+    </item>
+    
+    <item>
+      <title>ssm整合</title>
+      <link>https://shenchen123456.github.io/post/ssm/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/ssm/</guid>
+      <description>1.applicaitonContext.xml &amp;lt;!--管理所有除Controller注解的业务逻辑组件--&amp;gt; &amp;lt;context:component-scan base-package=&amp;#34;*****&amp;#34;&amp;gt; &amp;lt;context:exclude-filter type=&amp;#34;annotation&amp;#34; expression=&amp;#34;org.springframework.stereotype.Controller&amp;#34;/&amp;gt; &amp;lt;/context:component-scan&amp;gt; &amp;lt;!--引入外部dbconfig.proper</description>
+    </item>
+    
+    <item>
+      <title>springmvc运行流程图</title>
+      <link>https://shenchen123456.github.io/post/springmvc/</link>
+      <pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/springmvc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring IOC</title>
+      <link>https://shenchen123456.github.io/post/spring/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/spring/</guid>
+      <description>1.ApplicationContext的三个常用实现类： classPathApplicationContext： 它可以加载类路径下的配置文</description>
+    </item>
+    
+    <item>
+      <title>Annotation</title>
+      <link>https://shenchen123456.github.io/post/annotation/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/annotation/</guid>
+      <description>注解本质上就是一个接口，该接口默认继承Annotation接口 1、元注解 ​ 元注解的作用就是描述其他注解。Java1.5定义了4个标准的met</description>
+    </item>
+    
+    <item>
+      <title>IO</title>
+      <link>https://shenchen123456.github.io/post/io/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/io/</guid>
+      <description>一、字节与字符 字节与字符之间的关系 Java采用unicode编码，通讲，2个字节来表示一个字符。 在0~127整数之间的字符映射，unicod</description>
+    </item>
+    
+    <item>
+      <title>常用的函数式接口</title>
+      <link>https://shenchen123456.github.io/post/function/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/function/</guid>
+      <description>常用的函数式接口 jdk提供了大量常用的函数式接口以丰富lambda的典型使用场景，它们主要在java.util.function包中被提高。</description>
+    </item>
+    
+    <item>
+      <title>遍历文件夹</title>
+      <link>https://shenchen123456.github.io/post/file/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/file/</guid>
+      <description>1.遍历文件 public static void main(String[] args) throws Exception { String filepath = &amp;#34;E:/IDEA/workspace/MyWorkspace/JavaTest&amp;#34;; File file = new File(filepath); getfile(file); } public static void getfile(File file) { System.out.println(file.getAbsolutePath()); File[] files = file.listFiles(); for (File file1 : files) { if (file1.isDirectory()) { getfile(file1); } else { System.out.println(file1); } } } main E:\IDEA\workspace\MyWorkspace\JavaTest E:\IDEA\workspace\MyWorkspace\JavaTest\JavaTest.iml E:\IDEA\workspace\MyWorkspace\JavaTest\src E:\IDEA\workspace\MyWorkspace\JavaTest\src\com E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\LinkedBinaryTree.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Node.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\QuickSort.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Test.java E:\IDEA\workspace\MyWorkspace\JavaTest\src\com\Tree.java 2.使用文件过</description>
+    </item>
+    
+    <item>
+      <title>jvm了解</title>
+      <link>https://shenchen123456.github.io/post/jvm/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/jvm/</guid>
+      <description>JVM基本构架 虚拟机是物理机的软件实现。Java的设计理念是WORA（Write Once Run Anywhere，一次编写随处运行）。编译器将Java文</description>
+    </item>
+    
+    <item>
+      <title>关于 降级,熔断,限流</title>
+      <link>https://shenchen123456.github.io/post/java/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/java/</guid>
+      <description>当我们的系统的访问量突然剧增，大量的请求涌入过来，最典型的就是秒杀业务了，我们可能会知道会有一波高峰，这时候该如何处理？而且现在很多情况我们</description>
+    </item>
+    
+    <item>
+      <title>关于重写equals同时重写hashcode</title>
+      <link>https://shenchen123456.github.io/post/equelsandhashcode/</link>
+      <pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/equelsandhashcode/</guid>
+      <description>1.Object中equals方法和hashcode public boolean equals(Object obj) { return (this == obj); } public native int hashCode(); 可以看出Object的equals是使用“==”实现的，即该</description>
+    </item>
+    
+    <item>
+      <title>数据结构--Dijkstra算法（逻辑实现）</title>
+      <link>https://shenchen123456.github.io/post/dijkstra/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/dijkstra/</guid>
+      <description>简介 ​ 迪杰斯特拉算法(Dijkstra)是由荷兰计算机科学家狄克斯特拉于1959 年提出的，因此又叫狄克斯特拉算法。是从一个顶点到其余各顶点的</description>
+    </item>
+    
+    <item>
+      <title>数据结构--快速排序</title>
+      <link>https://shenchen123456.github.io/post/quicksort/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/quicksort/</guid>
+      <description>1.基本思想 1.1 先从数列中取出一个数作为基准数 1.2 分区过程，将比这个数大的全放在右边，小的放在左边（分区） 1.3 再对左右分区重复第一，二步，直到各区</description>
+    </item>
+    
+    <item>
+      <title>数据结构---二叉树基本实现</title>
+      <link>https://shenchen123456.github.io/post/binarytree/</link>
+      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shenchen123456.github.io/post/binarytree/</guid>
+      <description>二叉树模型 基本结点 public class Node { Object data; Node leftChild; Node rightChild; public Node(Object data, Node leftChild, Node rightChild) { super(); this.data = data; this.leftChild = leftChild; this.rightChild = rightChild; } } 二叉树接口 //二叉树接口 public interface Tree { public int size(); public boolean isEmpty(); public int getHeight(); public void preTraversal(); public void middleTraversal();</description>
+    </item>
+    
+  </channel>
+</rss>
