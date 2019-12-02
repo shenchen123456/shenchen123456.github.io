@@ -58,6 +58,16 @@
   </url>
   
   <url>
+    <loc>http://shenchen123456.github.io/tags/spring/</loc>
+    <lastmod>2019-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://shenchen123456.github.io/tags/</loc>
+    <lastmod>2019-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://shenchen123456.github.io/categories/git/</loc>
     <lastmod>2019-08-16T00:00:00+00:00</lastmod>
   </url>
@@ -193,10 +203,6 @@
   
   <url>
     <loc>http://shenchen123456.github.io/about/desc/</loc>
-  </url>
-  
-  <url>
-    <loc>http://shenchen123456.github.io/tags/</loc>
   </url>
   
 </urlset>
